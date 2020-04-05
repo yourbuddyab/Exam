@@ -11,7 +11,7 @@
                             @if (session('error'))
                         <h5 class="text-danger">{{session('error')}}</h5>
                             @endif
-                            <form action="/startexam" method="post">
+                            <form action="/" method="post">
                                 @csrf
                                 <div class="form-group row">
                                   <label class="col-md-2 text-dark my-auto" for="name">Student Name</label>

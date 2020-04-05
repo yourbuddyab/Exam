@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/admin', function () {
     return view('/exam.admin.admin');
@@ -26,7 +26,7 @@ Route::get('/admin', function () {
 
 Route::resource('exam', 'ExamController');
 Route::resource('student', 'StudentController');
-Route::resource('startexam', 'ExaminationController');
+Route::resource('/', 'ExaminationController');// for main page
 Route::resource('answer', 'AnswerController');
 Route::post('/check/answer', 'AnswerController@examCheck');
 
