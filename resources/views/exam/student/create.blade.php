@@ -3,29 +3,38 @@
   @section('admin')
     <div class="container" style="margin-top: .04rem!important;">     
       <div class="row">
-        <div class="col-md-12 mx-auto mt-5">
+        <div class="col-md-12 mx-auto">
           <div class="card">
             <div class="card-header">Add Student</div>
             <div class="card-body">
               <form action="/student" method="post">
                 @csrf 
                 <div class="form-group">
-                  <input class="form-control" type="text" name="studentname" placeholder="Student Name">
+                  <label for="studentname">Student Name</label>
+                  <input class="form-control" type="text" name="studentname" id="studentname" placeholder="Student Name">
                 </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="class" placeholder="Class">
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="date" name="bdate" placeholder="Birth Date">
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="rollno" placeholder="RollNo">
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <input class="form-control" type="text" name="date" placeholder="Exam Date">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="class">Class</label>
+                    <select name="class" class="form-control" id="">
+                      @foreach ($classes as $item)
+                        <option value="{{$item->classesname}}">{{$item->classesname}}</option>  
+                      @endforeach
+                    </select>
                   </div>
-                  <div class="col-md-6">
+                  <div class="form-group col-md-6">
+                    <label for="">Date of Birth</label>
+                    <input class="form-control" type="date" name="bdate" placeholder="Birth Date">
+                  </div>
+                </div>
+               <div class="form-group row">
+                  <div class="col-md-4">
+                    <input class="form-control" type="text" name="rollno" placeholder="RollNo">
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control" type="text" name="date" placeholder="Examination Date">
+                  </div>
+                  <div class="col-md-4">
                     <input class="form-control" type="time" name="time" placeholder="Time">
                   </div>
                 </div> 

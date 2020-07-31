@@ -27,6 +27,7 @@
       <div class="sidebar-heading">Exam</div>
       <div class="list-group list-group-flush">
         <a href="/home" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="/examinationclass" class="list-group-item list-group-item-action bg-light">Add Class</a>
         <a href="/exam/create" class="list-group-item list-group-item-action bg-light">Question Makes</a>
         <a href="/exam" class="list-group-item list-group-item-action bg-light">Question List</a>
         <a href="/student/create" class="list-group-item list-group-item-action bg-light">Add Student Info</a>

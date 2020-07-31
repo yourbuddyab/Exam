@@ -63,6 +63,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/start', function () {
-//     return view('/exam.start');
-// });
+Route::resource('/examinationclass', 'ExaminationClassController');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\student;
+use App\ExaminationClass;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -25,7 +26,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('exam/student/create');
+        $classes = ExaminationClass::all();
+        return view('exam/student/create', compact('classes'));
     }
 
     /**
