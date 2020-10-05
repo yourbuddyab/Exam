@@ -40,11 +40,19 @@ class ExaminationController extends Controller
         // dd($request);
         $student=student::where('studentname', $request->studentName)->where('bdate', $request->bdate)->get()->toarray();
         $id=student::where('studentname', $request->studentName)->where('bdate', $request->bdate)->first();
-        if(count($student)){
-            $key=$request->studentName;
-            return redirect('/notication/'.$id->id)->with('name', $key);
-        }else{
-            return back()->with('error', 'The Student Name or Date of Birth you entered is incorrect!!');
+        if($id->date == date('d-m-Y')){
+            if ($id->time ==  date('h:i:s')) {
+                if(count($student)){
+                    $key=$request->studentName;
+                    return redirect('/notication/'.$id->id)->with('name', $key);
+                }else{
+                    return back()->with('error', 'The Student Name or Date of Birth you entered is incorrect!!');
+                }
+            }else {
+                return back()->with('error', 'You have remaining time');
+            }
+        }else {
+            return back()->with('error', "Not Schedule!!");
         }
     }
 
