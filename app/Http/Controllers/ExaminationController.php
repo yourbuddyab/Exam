@@ -40,14 +40,19 @@ class ExaminationController extends Controller
         // dd($request);
         $student=student::where('studentname', $request->studentName)->where('bdate', $request->bdate)->get()->toarray();
         $id=student::where('studentname', $request->studentName)->where('bdate', $request->bdate)->first();
-        if($id->date == date('d-m-Y')){
-            if ($id->time ==  date('h:i:s')) {
+        if ($id == null) {
+            return back()->with('error', "You are not registor!!");
+        }
+        if($id->date == date('Y-m-d')){
+            if ($id->status ==  1) {
                 if(count($student)){
                     $key=$request->studentName;
                     return redirect('/notication/'.$id->id)->with('name', $key);
                 }else{
                     return back()->with('error', 'The Student Name or Date of Birth you entered is incorrect!!');
                 }
+            }elseif ($id->status == 2) {
+                return back()->with('error', 'You  exam ended.');
             }else {
                 return back()->with('error', 'You have remaining time');
             }

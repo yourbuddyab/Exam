@@ -51,9 +51,14 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(exam $exam)
-    {       
-         $all = exam::all();
-        return view('exam.exam', compact('exam','all'));
+    { 
+        $student  = student::where('id', Session('name')->id)->first()->status;
+        if($student == 1){
+            $all = exam::all();
+            return view('exam.exam', compact('exam','all'));
+        }else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -105,23 +110,29 @@ class ExamController extends Controller
     }
     
     public function scorecard(){
-        $all = exam::all(); 
-        $answer = Answer::where('student_id', request()->student_id)->get();
-        $score = 0;
-        foreach ($all as $key => $value) {
-            foreach ($answer as $key) {
-                if($value->id === $key->exams_id){
-                    if($value->ans === $key->answer)
-                    {
-                        $score++;
-                    }
-                }
-            }            
-        }
         $student=student::where('id', request()->student_id)->first();
-        $student->Answer = $score;
-        $student->save();
-        return view('exam.finish',compact('score'));
+        if ($student->status == '1') {
+            $all = exam::all(); 
+            $answer = Answer::where('student_id', request()->student_id)->get();
+            $score = 0;
+            foreach ($all as $key => $value) {
+                foreach ($answer as $key) {
+                    if($value->id === $key->exams_id){
+                        if($value->ans === $key->answer)
+                        {
+                            $score++;
+                        }
+                    }
+                }            
+            }
+            $student->update([
+                'Answer' => $score,
+                'status' => '2'
+            ]);
+            return view('exam.finish',compact('score'));
+        }else {
+            return redirect('/');
+        }
     }
 
     // public function sessioname(Request $request)
@@ -134,7 +145,7 @@ class ExamController extends Controller
 
     public function addstudent()
     {
-        $exam = students::create($this->validateRequeststudent());
+        $exam = student::create($this->validateRequeststudent());
 		 return redirect('/exam/1');
     }
 

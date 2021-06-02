@@ -9,7 +9,7 @@
                     <div class="card-body text-center">
                         <h1>Thankyou.</h1>
                         <h4> {{ session('name')->studentname }}</h4>
-                        <a href="/startexam/create" class="btn btn-info">Finish</a>
+                        <a href="/" class="btn btn-info">Finish</a>
                         {{-- <p>Your score is : <span class="text-muted">{{$score}}</span></p> --}}
                     </div>
                 </div>
